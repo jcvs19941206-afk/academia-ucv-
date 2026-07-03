@@ -52,7 +52,10 @@ export async function createTask(
       .select("*, courses:course_id(name, color)")
       .single();
 
-    if (error) return { success: false, message: "Error al crear la tarea" };
+    if (error) {
+      console.error("Supabase Task Insert Error:", error);
+      return { success: false, message: `Error BD: ${error.message}` };
+    }
 
     revalidatePath("/dashboard");
     revalidatePath("/tasks");
@@ -101,7 +104,7 @@ export async function updateTask(
       status: parsed.data.status,
       due_date: parsed.data.due_date || null,
       completed_at:
-        parsed.data.status === "completed" ? new Date().toISOString() : null,
+        parsed.data.status === "completada" ? new Date().toISOString() : null,
     };
 
     const { error } = await supabase
@@ -124,7 +127,7 @@ export async function updateTask(
 // ─── TOGGLE STATUS (optimistic-friendly) ─────────────────────────────────────
 export async function toggleTaskStatus(
   id: string,
-  newStatus: "pending" | "in_progress" | "completed"
+  newStatus: "pendiente" | "en_progreso" | "completada" | "cancelada"
 ): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
@@ -138,8 +141,7 @@ export async function toggleTaskStatus(
       .from("tasks")
       .update({
         status: newStatus,
-        completed_at:
-          newStatus === "completed" ? new Date().toISOString() : null,
+        completed_at: newStatus === "completada" ? new Date().toISOString() : null,
       })
       .eq("id", id)
       .eq("user_id", user.id);

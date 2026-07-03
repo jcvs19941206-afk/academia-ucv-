@@ -49,14 +49,14 @@ export async function getDashboardMetrics(): Promise<DashboardMetrics> {
       .from("tasks")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
-      .in("status", ["pending", "in_progress"]),
+      .in("status", ["pendiente", "en_progreso"]),
 
     // Completadas hoy
     supabase
       .from("tasks")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
-      .eq("status", "completed")
+      .eq("status", "completada")
       .gte("completed_at", today),
 
     // Vencidas y no completadas
@@ -64,7 +64,7 @@ export async function getDashboardMetrics(): Promise<DashboardMetrics> {
       .from("tasks")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
-      .neq("status", "completed")
+      .neq("status", "completada")
       .lt("due_date", today),
 
     // Total cursos
@@ -84,7 +84,7 @@ export async function getDashboardMetrics(): Promise<DashboardMetrics> {
       .from("tasks")
       .select("*", { count: "exact", head: true })
       .eq("user_id", user.id)
-      .eq("status", "completed"),
+      .eq("status", "completada"),
   ]);
 
   const total = totalTasks ?? 0;
@@ -127,7 +127,7 @@ export async function getWeeklyActivity(): Promise<WeeklyActivity[]> {
       t.created_at?.startsWith(date)
     );
     const completedDay = (tasks ?? []).filter(
-      (t) => t.completed_at?.startsWith(date) && t.status === "completed"
+      (t) => t.completed_at?.startsWith(date) && t.status === "completada"
     );
 
     return {
@@ -155,7 +155,7 @@ export async function getUpcomingTasks(limit = 5) {
     .from("tasks")
     .select(`*, courses:course_id(name, color)`)
     .eq("user_id", user.id)
-    .neq("status", "completed")
+    .neq("status", "completada")
     .order("due_date", { ascending: true, nullsFirst: false })
     .order("priority", { ascending: false })
     .limit(limit);

@@ -88,7 +88,7 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
 
   // ── Optimistic status toggle ─────────────────────────────────────────────
   function handleToggleComplete(task: TaskWithCourse, checked: boolean) {
-    const newStatus = checked ? "completed" : "pending";
+    const newStatus = checked ? "completada" : "pendiente";
 
     // Instant optimistic update
     setOptimisticTasks((prev) =>
@@ -110,7 +110,7 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
         setOptimisticTasks(tasks);
         toast.error(result.message);
       } else {
-        if (newStatus === "completed") {
+        if (newStatus === "completada") {
           let days_before_due = null;
           if (task.due_date) {
             const diffTime = new Date(task.due_date).getTime() - new Date().getTime();
@@ -201,11 +201,11 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
 
     const date = new Date(task.due_date);
     const now = new Date();
-    const isOverdue = isBefore(date, now) && task.status !== "completed";
-    const isSoon =
+    const isOverdue = isBefore(date, now) && task.status !== "completada";
+    const isDueSoon =
       !isOverdue &&
-      isBefore(date, addDays(now, 3)) &&
-      task.status !== "completed";
+      differenceInDays(date, now) <= 3 &&
+      task.status !== "completada";
     const formatted = format(date, "dd MMM, yyyy", { locale: es });
 
     if (isOverdue) {
@@ -221,7 +221,7 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
       );
     }
 
-    if (isSoon) {
+    if (isDueSoon) {
       return (
         <div className="flex flex-col">
           <span className="font-mono text-warning font-bold text-xs">
@@ -250,13 +250,6 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
 
   return (
     <div className="space-y-4">
-      {isPending && (
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <Loader2 className="h-3 w-3 animate-spin" />
-          Actualizando...
-        </div>
-      )}
-
       <div className="border rounded-xl bg-card overflow-hidden">
         <div className="overflow-x-auto">
           <Table>
@@ -280,13 +273,13 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
                   {/* Checkbox */}
                   <TableCell>
                     <Checkbox
-                      checked={task.status === "completed"}
-                      onCheckedChange={(checked) =>
-                        handleToggleComplete(task, !!checked)
-                      }
-                      aria-label={`Marcar "${task.title}" como ${
-                        task.status === "completed" ? "pendiente" : "completada"
-                      }`}
+                      checked={task.status === "completada"}
+                      onCheckedChange={(checked) => handleStatusChange(task, checked as boolean)}
+                      disabled={isUpdating === task.id}
+                      className={cn(
+                        "transition-all duration-200",
+                        task.status === "completada" ? "data-[state=checked]:bg-success data-[state=checked]:border-success" : ""
+                      )}
                     />
                   </TableCell>
 
@@ -297,11 +290,10 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
                   >
                     <div className="flex flex-col">
                       <span
-                        className={`font-semibold text-sm ${
-                          task.status === "completed"
-                            ? "line-through text-muted-foreground"
-                            : ""
-                        }`}
+                        className={cn(
+                          "font-semibold text-sm transition-colors duration-200",
+                          task.status === "completada" ? "line-through text-muted-foreground" : ""
+                        )}
                       >
                         {task.title}
                       </span>

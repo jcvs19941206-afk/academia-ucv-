@@ -11,10 +11,10 @@ interface UpcomingTasksProps {
 }
 
 const priorityConfig = {
-  urgent: { label: "Urgente", variant: "destructive" as const },
-  high: { label: "Alta", variant: "default" as const },
-  medium: { label: "Media", variant: "secondary" as const },
-  low: { label: "Baja", variant: "outline" as const },
+  urgente: { label: "Urgente", variant: "destructive" as const },
+  alta: { label: "Alta", variant: "default" as const },
+  media: { label: "Media", variant: "secondary" as const },
+  baja: { label: "Baja", variant: "outline" as const },
 };
 
 
