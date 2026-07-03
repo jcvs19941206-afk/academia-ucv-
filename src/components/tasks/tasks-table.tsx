@@ -276,10 +276,9 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
                       checked={task.status === "completada"}
                       onCheckedChange={(checked) => handleToggleComplete(task, !!checked)}
                       disabled={isPending}
-                      className={cn(
-                        "transition-all duration-200",
+                      className={`transition-all duration-200 ${
                         task.status === "completada" ? "data-[state=checked]:bg-success data-[state=checked]:border-success" : ""
-                      )}
+                      }`}
                     />
                   </TableCell>
 
@@ -288,15 +287,14 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
                     className="cursor-pointer"
                     onClick={() => handleEditTask(task)}
                   >
-                    <div className="flex flex-col">
-                      <span
-                        className={cn(
-                          "font-semibold text-sm transition-colors duration-200",
-                          task.status === "completada" ? "line-through text-muted-foreground" : ""
-                        )}
-                      >
-                        {task.title}
-                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span
+                          className={`font-medium block truncate text-sm sm:text-base transition-colors duration-200 ${
+                            task.status === "completada" ? "line-through text-muted-foreground" : "text-foreground"
+                          }`}
+                        >
+                          {task.title}
+                        </span>
                       {task.description && (
                         <span className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
                           {task.description}
