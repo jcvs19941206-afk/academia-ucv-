@@ -275,7 +275,7 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
                     <Checkbox
                       checked={task.status === "completada"}
                       onCheckedChange={(checked) => handleToggleComplete(task, !!checked)}
-                      disabled={isUpdating === task.id}
+                      disabled={isPending}
                       className={cn(
                         "transition-all duration-200",
                         task.status === "completada" ? "data-[state=checked]:bg-success data-[state=checked]:border-success" : ""
