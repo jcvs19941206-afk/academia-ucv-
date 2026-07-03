@@ -32,6 +32,18 @@ export async function createCourse(
       };
     }
 
+    const { data: existingCourse } = await supabase
+      .from("courses")
+      .select("id")
+      .eq("user_id", user.id)
+      .ilike("name", parsed.data.name)
+      .maybeSingle();
+
+    if (existingCourse) {
+      return { success: false, message: "Ya existe un curso con este nombre" };
+    }
+
+
     const { data, error } = await supabase
       .from("courses")
       .insert({
@@ -85,6 +97,19 @@ export async function updateCourse(
         errors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
       };
     }
+
+    const { data: existingCourse } = await supabase
+      .from("courses")
+      .select("id")
+      .eq("user_id", user.id)
+      .ilike("name", parsed.data.name)
+      .neq("id", id)
+      .maybeSingle();
+
+    if (existingCourse) {
+      return { success: false, message: "Ya existe un curso con este nombre" };
+    }
+
 
     const { error } = await supabase
       .from("courses")

@@ -2,8 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCourses } from "@/app/actions/courses";
 import { EmptyCourses } from "@/components/shared/empty-courses";
-import { Button } from "@/components/ui/button";
-import { PlusCircle, BookOpen } from "lucide-react";
+import { CourseCard } from "@/components/courses/course-card";
+import { CreateCourseButton } from "@/components/courses/create-course-button";
 
 export const metadata = {
   title: "Cursos | AcademIA",
@@ -32,10 +32,7 @@ export default async function CoursesPage() {
         </div>
         
         {courses.length > 0 && (
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Nuevo curso
-          </Button>
+          <CreateCourseButton />
         )}
       </div>
 
@@ -44,24 +41,7 @@ export default async function CoursesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
-            <div key={course.id} className="p-6 border rounded-xl shadow-sm bg-card flex flex-col gap-4 relative overflow-hidden group">
-              <div 
-                className="absolute top-0 left-0 w-1 h-full"
-                style={{ backgroundColor: course.color }}
-              />
-              <div className="flex items-center gap-3">
-                 <div className="h-10 w-10 rounded bg-muted flex items-center justify-center">
-                    <BookOpen className="h-5 w-5" style={{ color: course.color }} />
-                 </div>
-                 <div>
-                    <h3 className="font-semibold">{course.name}</h3>
-                    {course.code && <p className="text-xs text-muted-foreground">{course.code}</p>}
-                 </div>
-              </div>
-              {course.description && (
-                <p className="text-sm text-muted-foreground line-clamp-2">{course.description}</p>
-              )}
-            </div>
+            <CourseCard key={course.id} course={course} />
           ))}
         </div>
       )}
