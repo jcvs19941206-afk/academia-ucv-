@@ -9,7 +9,7 @@ export const taskSchema = z.object({
   course_id: z.string().uuid("Selecciona un curso válido").optional().nullable(),
   priority: z.enum(["urgente", "alta", "media", "baja"], {
     errorMap: () => ({ message: "Selecciona una prioridad válida" }),
-  }),
+  } as any),
   status: z.enum(["pendiente", "en_progreso", "completada", "cancelada"]).optional(),
   due_date: z.string().optional().nullable(),
 });
