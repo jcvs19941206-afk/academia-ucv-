@@ -202,9 +202,9 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
     const date = new Date(task.due_date);
     const now = new Date();
     const isOverdue = isBefore(date, now) && task.status !== "completada";
-    const isDueSoon =
+    const isSoon =
       !isOverdue &&
-      differenceInDays(date, now) <= 3 &&
+      isBefore(date, addDays(now, 3)) &&
       task.status !== "completada";
     const formatted = format(date, "dd MMM, yyyy", { locale: es });
 
@@ -221,7 +221,7 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
       );
     }
 
-    if (isDueSoon) {
+    if (isSoon) {
       return (
         <div className="flex flex-col">
           <span className="font-mono text-warning font-bold text-xs">
