@@ -43,8 +43,6 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { track } = useAnalytics();
-  const supabase = createClient();
-
   const {
     register,
     handleSubmit,
@@ -55,6 +53,7 @@ export function LoginForm() {
 
   async function onSubmit(data: LoginFormData) {
     setIsLoading(true);
+    const supabase = createClient();
 
     try {
       const { error } = await supabase.auth.signInWithPassword({

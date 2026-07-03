@@ -57,8 +57,6 @@ export function SignupForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const supabase = createClient();
-
   const {
     register,
     handleSubmit,
@@ -69,6 +67,7 @@ export function SignupForm() {
 
   async function onSubmit(data: SignupFormData) {
     setIsLoading(true);
+    const supabase = createClient();
 
     try {
       const { error } = await supabase.auth.signUp({
