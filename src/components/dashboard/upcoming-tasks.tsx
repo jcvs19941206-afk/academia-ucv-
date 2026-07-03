@@ -70,7 +70,7 @@ export function UpcomingTasks({ tasks }: UpcomingTasksProps) {
       <CardContent>
         <div className="space-y-3">
           {tasks.map((task) => {
-            const config = priorityConfig[task.priority as keyof typeof priorityConfig] ?? priorityConfig.medium;
+            const config = priorityConfig[task.priority as keyof typeof priorityConfig] ?? priorityConfig.media;
             const overdue = isOverdue(task.due_date);
             const near = isNear(task.due_date);
 
