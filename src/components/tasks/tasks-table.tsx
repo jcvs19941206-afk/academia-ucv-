@@ -132,25 +132,25 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
 
   const getPriorityBadge = (priority: Task["priority"]) => {
     switch (priority) {
-      case "urgent":
+      case "urgente":
         return (
           <Badge variant="destructive" className="uppercase text-[10px]">
             Urgente
           </Badge>
         );
-      case "high":
+      case "alta":
         return (
           <Badge className="bg-orange-500 hover:bg-orange-600 uppercase text-[10px]">
             Alta
           </Badge>
         );
-      case "medium":
+      case "media":
         return (
           <Badge variant="secondary" className="uppercase text-[10px]">
             Media
           </Badge>
         );
-      case "low":
+      case "baja":
         return (
           <Badge
             variant="outline"
@@ -164,26 +164,27 @@ export function TasksTable({ tasks, courses }: TasksTableProps) {
 
   const getStatusDisplay = (status: Task["status"]) => {
     switch (status) {
-      case "completed":
+      case "completada":
         return (
           <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-success/10 text-success text-xs font-medium">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Completada</span>
           </div>
         );
-      case "in_progress":
+      case "en_progreso":
         return (
           <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-primary/10 text-primary text-xs font-medium">
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             <span>En progreso</span>
           </div>
         );
-      case "cancelled":
+      case "cancelada":
         return (
           <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-muted text-muted-foreground text-xs font-medium">
             <span>Cancelada</span>
           </div>
         );
+      case "pendiente":
       default:
         return (
           <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-muted text-muted-foreground text-xs font-medium">

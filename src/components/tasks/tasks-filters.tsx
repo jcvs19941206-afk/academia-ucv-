@@ -92,10 +92,10 @@ export function TasksFilters({ courses }: TasksFiltersProps) {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todas las prioridades</SelectItem>
-            <SelectItem value="urgent">🔴 Urgente</SelectItem>
-            <SelectItem value="high">🟠 Alta</SelectItem>
-            <SelectItem value="medium">🟡 Media</SelectItem>
-            <SelectItem value="low">🟢 Baja</SelectItem>
+            <SelectItem value="urgente">🔴 Urgente</SelectItem>
+            <SelectItem value="alta">🟠 Alta</SelectItem>
+            <SelectItem value="media">🟡 Media</SelectItem>
+            <SelectItem value="baja">🟢 Baja</SelectItem>
           </SelectContent>
         </Select>
 
@@ -109,9 +109,10 @@ export function TasksFilters({ courses }: TasksFiltersProps) {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos los estados</SelectItem>
-            <SelectItem value="pending">Pendiente</SelectItem>
-            <SelectItem value="in_progress">En progreso</SelectItem>
-            <SelectItem value="completed">Completada</SelectItem>
+            <SelectItem value="pendiente">Pendiente</SelectItem>
+            <SelectItem value="en_progreso">En progreso</SelectItem>
+            <SelectItem value="completada">Completada</SelectItem>
+            <SelectItem value="cancelada">Cancelada</SelectItem>
           </SelectContent>
         </Select>
 

@@ -6,8 +6,8 @@ export type ActionResponse<T = void> = {
   errors?: Record<string, string[]>;
 };
 
-export type Priority = "urgent" | "high" | "medium" | "low";
-export type TaskStatus = "pending" | "in_progress" | "completed" | "cancelled";
+export type Priority = "urgente" | "alta" | "media" | "baja";
+export type TaskStatus = "pendiente" | "en_progreso" | "completada" | "cancelada";
 
 export interface Profile {
   id: string;

@@ -148,13 +148,13 @@ export function TaskDetailModal({
               <select
                 id="priority"
                 name="priority"
-                defaultValue={task?.priority || "medium"}
+                defaultValue={task?.priority || "media"}
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option value="low">🟢 Baja</option>
-                <option value="medium">🟡 Media</option>
-                <option value="high">🟠 Alta</option>
-                <option value="urgent">🔴 Urgente</option>
+                <option value="baja">🟢 Baja</option>
+                <option value="media">🟡 Media</option>
+                <option value="alta">🟠 Alta</option>
+                <option value="urgente">🔴 Urgente</option>
               </select>
               {state?.errors?.priority && (
                 <p className="text-sm text-destructive" role="alert">
@@ -171,13 +171,13 @@ export function TaskDetailModal({
               <select
                 id="status"
                 name="status"
-                defaultValue={task?.status || "pending"}
+                defaultValue={task?.status || "pendiente"}
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option value="pending">Pendiente</option>
-                <option value="in_progress">En progreso</option>
-                <option value="completed">Completada</option>
-                <option value="cancelled">Cancelada</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="en_progreso">En progreso</option>
+                <option value="completada">Completada</option>
+                <option value="cancelada">Cancelada</option>
               </select>
             </div>
 
