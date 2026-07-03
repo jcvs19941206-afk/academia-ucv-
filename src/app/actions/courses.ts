@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { createClient } from "@/lib/supabase/server";
 import type { ActionResponse } from "@/types";
 import { courseSchema } from "@/lib/validations/course";
 
