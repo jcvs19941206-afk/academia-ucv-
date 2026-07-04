@@ -34,10 +34,9 @@ export default function LoginPage() {
               height="100%" 
               src="https://www.youtube.com/embed/k-p4N2x5x7M?autoplay=1&mute=1&loop=1&playlist=k-p4N2x5x7M" 
               title="Bienvenida UCV" 
-              frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowFullScreen
-              className="absolute top-0 left-0 w-full h-full object-cover"
+              className="absolute top-0 left-0 w-full h-full object-cover border-0"
             ></iframe>
           </div>
         </div>
