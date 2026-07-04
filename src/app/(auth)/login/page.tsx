@@ -1,4 +1,3 @@
-import { QuoteRotator } from "@/components/shared/quote-rotator";
 import { LoginForm } from "./login-form";
 
 export const metadata = {
@@ -19,9 +18,28 @@ export default function LoginPage() {
         <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-accent/20 rounded-full blur-3xl"></div>
         
         {/* Contenido visual */}
-        <div className="relative z-10 max-w-md text-center text-white">
-          {/* Frase motivacional rotativa */}
-          <QuoteRotator />
+        <div className="relative z-10 w-full max-w-lg text-center text-white">
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold mb-2">Bienvenido a la UCV</h2>
+            <p className="text-white/80">Comienza tu viaje académico con nosotros</p>
+          </div>
+          
+          <div className="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl border border-white/10 relative">
+            {/* 
+              Video Institucional UCV o de Bienvenida 
+              Puedes cambiar el src por cualquier otro ID de YouTube
+            */}
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/k-p4N2x5x7M?autoplay=1&mute=1&loop=1&playlist=k-p4N2x5x7M" 
+              title="Bienvenida UCV" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+              className="absolute top-0 left-0 w-full h-full object-cover"
+            ></iframe>
+          </div>
         </div>
       </div>
       
