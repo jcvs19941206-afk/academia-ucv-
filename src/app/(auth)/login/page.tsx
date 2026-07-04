@@ -29,7 +29,7 @@ export default function LoginPage() {
             <iframe 
               width="100%" 
               height="100%" 
-              src="https://www.youtube.com/embed/k-p4N2x5x7M?autoplay=1&mute=1&loop=1&playlist=k-p4N2x5x7M" 
+              src="https://www.youtube.com/embed/Nj221g6ObpE?autoplay=1&mute=1&loop=1&playlist=Nj221g6ObpE" 
               title="Bienvenida UCV" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowFullScreen
