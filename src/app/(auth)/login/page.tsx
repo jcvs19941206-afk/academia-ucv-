@@ -25,10 +25,7 @@ export default function LoginPage() {
           </div>
           
           <div className="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl border border-white/10 relative">
-            {/* 
-              Video Institucional UCV o de Bienvenida 
-              Puedes cambiar el src por cualquier otro ID de YouTube
-            */}
+
             <iframe 
               width="100%" 
               height="100%" 
