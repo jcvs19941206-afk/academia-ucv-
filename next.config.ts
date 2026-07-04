@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
 
-import { withSentryConfig } from "@sentry/nextjs";
 
 import withBundleAnalyzer from "@next/bundle-analyzer";
 
@@ -12,10 +11,4 @@ const nextConfig: NextConfig = {
   /* config options here */
 };
 
-export default analyzer(withSentryConfig(nextConfig, {
-  silent: true,
-  org: "academia",
-  project: "academia-app",
-  widenClientFileUpload: true,
-  tunnelRoute: "/monitoring",
-}));
+export default analyzer(nextConfig);
