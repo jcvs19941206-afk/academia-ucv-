@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 
 const emailSchema = z.object({
@@ -9,11 +10,14 @@ const emailSchema = z.object({
 
 export async function requestPasswordReset(_prev: unknown, formData: FormData) {
   const supabase = await createClient();
+  const headersList = await headers();
+  const origin = headersList.get("origin") || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
   const parsed = emailSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { success: false, message: "Correo inválido", errors: parsed.error.flatten().fieldErrors };
 
   const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/reset-password`,
+    redirectTo: `${origin}/reset-password`,
   });
 
   if (error) {
