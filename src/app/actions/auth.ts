@@ -22,10 +22,10 @@ export async function requestPasswordReset(_prev: unknown, formData: FormData) {
 
   if (error) {
     console.error("Error reset password:", error);
+    return { success: false, message: "La cuenta no existe" };
   }
 
-  // Siempre devolver éxito (seguridad: no revelar si el email existe)
-  return { success: true, message: "Si el correo existe, recibirás instrucciones" };
+  return { success: true, message: "Te hemos enviado un correo con las instrucciones." };
 }
 
 const passwordSchema = z
